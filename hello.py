@@ -19,12 +19,21 @@ def header(width: int, height: int) -> str:
 def body(width: int, height: int) -> str:
     return clean_text(f"""
         <rect
-            style="fill:#ffffff;stroke:#ff0000;stroke-width:0.163087"
-            id="rect1"
+            style="fill:#ffffff;stroke:#ff0000;stroke-width:0.16"
             width="{width}"
             height="{height}"
             x="0"
             y="0" />""")
+
+
+def circle(x: int, y: int, r: int = 2.45) -> str:
+    return clean_text(f"""
+        <ellipse
+            style="fill:#ffffff;stroke:#ff0000;stroke-width:0.16"
+            cx="{x}"
+            cy="{y}"
+            rx="{r}"
+            ry="{r}" />""")
 
 
 def footer() -> str:
@@ -34,7 +43,9 @@ def footer() -> str:
 def main():
     width = input("Please enter width(mm): ")
     height = input("Please enter height(mm): ")
-    svg = header(width, height) + "\n" + body(width, height) + "\n" + footer()
+
+    c = circle(5, 5)
+    svg = header(width, height) + "\n" + body(width, height) + "\n" + c + "\n" + footer()
 
     with open("output.svg", "w") as f:
         f.write(svg)
